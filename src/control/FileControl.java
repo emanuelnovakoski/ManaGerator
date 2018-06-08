@@ -40,8 +40,8 @@ public class FileControl {
 		return fileManager.setFavorite(foodName, value);
 	}
 
-	public void saveFoodFile(String food, String minValue) {
-		FileManager.getInstance().addFood(new Food(food, Double.parseDouble(minValue)));
+	public void saveFoodFile(String food, String minValue, String category, String date) {
+		FileManager.getInstance().addFood(new Food(food, Double.parseDouble(minValue), category, date));
 	}
 
 }

@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+
 import control.FileControl;
 import control.Sensor;
 import interfaces.Notifications;
@@ -78,7 +81,7 @@ public class SensorSimulator extends JFrame {
 	}
 
 	private void texts() {
-		JLabel lblweight = new JLabel("Valor limite para notificação: (Balança)");
+		JLabel lblweight = new JLabel("Valor limite para notificaï¿½ï¿½o: (Balanï¿½a)");
 		lblweight.setBounds(20, 128, 307, 14);
 		contentPane.add(lblweight);
 
@@ -95,7 +98,7 @@ public class SensorSimulator extends JFrame {
 		lbldefault.setBounds(20, 174, 177, 14);
 		contentPane.add(lbldefault);
 
-		JLabel lbltitle = new JLabel("Tela de controle (simulação)");
+		JLabel lbltitle = new JLabel("Tela de controle (simulaï¿½ï¿½o)");
 		lbltitle.setBounds(147, 11, 187, 14);
 		contentPane.add(lbltitle);
 
@@ -114,13 +117,46 @@ public class SensorSimulator extends JFrame {
 				comboBox.addItem(foodsName[i]);
 			}	
 		}
+		
+		comboBox.addPopupMenuListener(new PopupMenuListener() {
+
+			@Override
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				updateComboBox();				
+			}
+
+			@Override
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				//popupMenuWillBecomeInvisible(e);
+			}
+
+			@Override
+			public void popupMenuCanceled(PopupMenuEvent e) {
+				comboBox.removeAllItems();
+				comboBox.addItem("Alimentos:");
+			}
+		});
+		
 	}
 
+	public void updateComboBox() {
+		comboBox.removeAllItems();
+		String[] foodsName = fileControl.getFoodsName();
+		for(int i = 0; i<foodsName.length; i++) {
+			if(fileControl.isFavoriteFood(foodsName[i])) {
+				comboBox.addItem(foodsName[i]);
+			}	
+		}
+	}
+	
 	private void buttons(JComboBox<String> comboBox) {
 		JButton btnUpdate = new JButton("ATUALIZAR");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sensor.updateSensors(comboBox, gasValue, amountValue, weightValue);
+				
+				String foodName = (String) comboBox.getSelectedItem();
+				
+				sensor.updateSensors(foodName, gasValue, amountValue, weightValue);
 				comboBox.removeAllItems();
 				comboBox();
 			}

@@ -1,6 +1,5 @@
 package control;
 
-import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import interfaces.Notifications;
 import data.Food;
@@ -11,10 +10,8 @@ public class Sensor {
 	Notifications notifications = new Notifications();
 	Food food;
 
-	@SuppressWarnings("rawtypes")
-	public void updateSensors(JComboBox comboBox, JSpinner gasValue, JSpinner amountValue, JSpinner weightValue) {
+	public void updateSensors(String  foodName, JSpinner gasValue, JSpinner amountValue, JSpinner weightValue) {
 		FileControl fileControl = new FileControl();
-		String foodName = comboBox.getSelectedItem() + "";
 		int notification = 0;
 		int gas = (Integer) gasValue.getValue();
 		int  amount = (Integer) amountValue.getValue();

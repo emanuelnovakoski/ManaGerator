@@ -134,7 +134,9 @@ public class FileManager {
             String food = (String) ((JSONObject) foods.get(i)).get("name");
             if(foodName.equals(food)) {
                 double portion = (double) ((JSONObject) foods.get(i)).get("portion");
-                return new Food(food, portion);
+                String category =  (String) ((JSONObject) foods.get(i)).get("category");
+                String date =  (String) ((JSONObject) foods.get(i)).get("date");
+                return new Food(food, portion, category, date);
             }
         }
         return null;
