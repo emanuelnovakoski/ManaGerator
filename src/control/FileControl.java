@@ -1,5 +1,7 @@
 package control;
 
+import java.util.ArrayList;
+
 import data.FileManager;
 import data.Food;
 
@@ -40,6 +42,14 @@ public class FileControl {
 		return fileManager.setFavorite(foodName, value);
 	}
 
+	public ArrayList<Food> getFoods() {
+		return fileManager.getAllFoods();
+	}
+	
+	public void removeFood(String foodName) {
+		fileManager.removeFood(foodName);
+	}
+	
 	public void saveFoodFile(String food, String minValue, String category, String date) {
 		FileManager.getInstance().addFood(new Food(food, Double.parseDouble(minValue), category, date));
 	}

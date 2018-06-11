@@ -35,6 +35,14 @@ public class Food {
         return name;
     }
 
+    public String dateToString() {
+    	return date;
+    }
+    
+    public String categoryToString() {
+    	return category;
+    }
+    
     public String minPortionToString() {
         return minPortion.toString();
     }

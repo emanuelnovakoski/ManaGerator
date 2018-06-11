@@ -1,6 +1,7 @@
 package control;
 
 import javax.swing.JFrame;
+
 import interfaces.WindowManager;
 
 public class Main extends JFrame{
@@ -10,5 +11,6 @@ public class Main extends JFrame{
 		windowManager = new WindowManager();
 		windowManager.startMenu();
 		windowManager.sensorSimulator();
+
 	}
 }

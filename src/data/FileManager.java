@@ -151,6 +151,27 @@ public class FileManager {
         return foodsName;
     }
 
+    public ArrayList<Food> getAllFoods() {
+    	
+    	JSONArray foods = getFoods();
+    	ArrayList<Food> foodArray = new ArrayList<Food>();
+        for(int i = 0; i<foods.size(); i++) {
+        	
+        	String name = (String) ((JSONObject) foods.get(i)).get("name");
+        	double portion = (double) ((JSONObject) foods.get(i)).get("portion");
+        	String category = (String) ((JSONObject) foods.get(i)).get("category");
+        	String date = (String) ((JSONObject) foods.get(i)).get("date");
+        	
+        	Food food = new Food(name, portion, category, date);
+        	
+        	foodArray.add(food);
+            
+        }
+        return foodArray;
+    	
+    }
+    
+    
     private JSONArray getFoods() {
         JSONArray array = (JSONArray) readFile("Foods.json");
         if (array == null) {
